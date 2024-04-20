@@ -4,6 +4,8 @@ import os
 class Screen:
 
     def __init__(self, screen, bg_path:str) -> None:
+        #setup event to switch screens
+        self.__SCREEN_SWITCH_EVENT = pygame.event.custom_type()
         self.__bg_path = bg_path
         self.__screen = screen
         #self.__engine = pygame_game
@@ -13,6 +15,9 @@ class Screen:
         self.__screen.blit(scaled, (0,0))
 
         return
+
+    def switch_screen(self, forward:bool):
+        pygame.event.Event(self.__SCREEN_SWITCH_EVENT, value=forward)
 
     def test_draw(self):
         # Run until the user asks to quit

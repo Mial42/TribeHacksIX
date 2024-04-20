@@ -17,8 +17,14 @@ path_separator = {"Windows":["/",r"\\","\\"], "Darwin":[r"\\", "/", "/"], "Linux
 # screen - pygame.display var that was set in main()
 def run(screen:pygame.display):
     opsys = platform.system()
+    
+    #TODO add background paths to folder and plug those in here
+    #TODO replace testbg.png with a real background
     screens = [
-        ss.StartScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]))
+        ss.StartScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1])),
+        cs.CreationScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1])),
+        fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1])),
+        gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1])),
       ]
     
     running = True
@@ -29,7 +35,9 @@ def run(screen:pygame.display):
             if event.type == pygame.QUIT:
                 running = False
                 break
-        screens[cur_scr].draw_bg()
+            if event.type == pygame.event.Event(SCREEN_SWITCH_EVENT):
+                cur_scr += 1
+        screens[cur_scr % 4].draw_bg()
 
         pygame.display.flip()
 
@@ -41,6 +49,7 @@ def main():
     mixer.init()
     pygame.init()
 
+    #TODO add way to change resolution
     screen_width = 1080
     screen_height = 600
 
