@@ -1,7 +1,8 @@
+from screen import Screen
 import pygame
 
 class GameOverScreen(Screen):
-    def __init__(self, screen: pygame.display, bg_path: str, final_score: int, screen_switch_event_val:int):
+    def __init__(self, screen: pygame.display, bg_path: str, screen_switch_event_val:int, final_score: int):
         super().__init__(screen, bg_path, screen_switch_event_val)
         self.final_score = final_score
         self.font = pygame.font.Font(None, 36)  # Use Pygame's default font
@@ -31,27 +32,29 @@ class GameOverScreen(Screen):
         pygame.display.flip()  # Update the display
 
     def handle_event(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        #if event.type == pygame.MOUSEBUTTONDOWN:
             if self.button_rect.collidepoint(event.pos):
-                return 'start_screen'  #Need to switch to start
+                # return 'start_screen'  #Need to switch to start
+                super().switch_screen(1)
+    
 
-# Usage example within a game loop or controller:
-screen = pygame.display.set_mode((800, 600))  # Main game screen
-bg_path = 'path_to_background_image.jpg'
-final_score = 123
+# # Usage example within a game loop or controller:
+# screen = pygame.display.set_mode((800, 600))  # Main game screen
+# bg_path = 'path_to_background_image.jpg'
+# final_score = 123
 
-game_over_screen = GameOverScreen(screen, bg_path, final_score)
+# game_over_screen = GameOverScreen(screen, bg_path, final_score)
 
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            action = game_over_screen.handle_event(event)
-            if action == 'start_screen':
-                # Switch to start screen logic
-                print("Go to start screen")
+# running = True
+# while running:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
+#         elif event.type == pygame.MOUSEBUTTONDOWN:
+#             action = game_over_screen.handle_event(event)
+#             if action == 'start_screen':
+#                 # Switch to start screen logic
+#                 print("Go to start screen")
 
-    game_over_screen.display()
+#     game_over_screen.display()
 

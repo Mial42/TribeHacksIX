@@ -21,6 +21,12 @@ class Screen:
     def switch_screen(self, forward:int):
         pygame.event.post(pygame.event.Event(self.__SCREEN_SWITCH_EVENT, value=forward))
 
+    def handle_event(self, event):
+        # DUMMY FUNCTION
+        # MUST BE OVERWRITTEN
+        return
+
+    #TEST METHOD, NOT TO BE CALLED
     def test_draw(self):
         # Run until the user asks to quit
         running = True
