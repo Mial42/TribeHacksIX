@@ -7,6 +7,9 @@ class Mecha():
         self.arms = arms
         self.legs = legs
         self.can_move = True
+        self.x = x
+        self.y = y
+        self.is_stunned = False
     
     def move(self, dy, dx):
         if self.can_move:
@@ -26,8 +29,17 @@ class Mecha():
 
 
     def update(self):
+            #check what action the player is performing
+        if self.health <= 0:
+            self.health = 0
+            self.alive = False
+            self.update_action()#6:death
 
-    def attack(self,target):
+    def attack(self, target):
+        # Simple attack reducing target health by a fixed amount
+        damage = self.arms.damage  
+        target.health -= damage  
+
 
 
 
@@ -48,11 +60,12 @@ class Chest():
         self.width = width
 
 class Arms():
-    def __init__(self, spritepath, health, attack, height):
+    def __init__(self, spritepath, health, damage, height):
         #TODO initialize spritepath
         self.sprite = pygame.image.load(spritepath)
         self.health = health
         self.height = height
+        self.damage = damage
 
 class Legs():
     def __init__(self, spritepath, health, speed, height):
