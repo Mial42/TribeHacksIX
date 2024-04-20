@@ -3,13 +3,15 @@ import os
 
 class Screen:
 
-    def __init__(self, screen:pygame.display, bg_path:str) -> None:
+    def __init__(self, screen, bg_path:str) -> None:
         self.__bg_path = bg_path
         self.__screen = screen
         #self.__engine = pygame_game
 
     def draw_bg(self):
-        self.__screen
+        scaled = pygame.transform.scale(pygame.image.load(self.__bg_path).convert_alpha(), pygame.display.get_window_size())
+        self.__screen.blit(scaled, (0,0))
+
         return
 
     def test_draw(self):
@@ -33,4 +35,5 @@ class Screen:
 
         # Done! Time to quit.
         pygame.quit()
+
 
