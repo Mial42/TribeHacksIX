@@ -1,5 +1,6 @@
 from screen import Screen
 import pygame
+from screen import Screen
 
 class GameOverScreen(Screen):
     def __init__(self, screen: pygame.display, bg_path: str, screen_switch_event_val:int, final_score: int):
