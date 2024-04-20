@@ -13,7 +13,7 @@ class StartScreen(Screen):
         if self.start_rct.collidepoint(event.pos):
             super().switch_screen(1)
         elif self.quit_rct.collidepoint(event.pos):
-            pygame.event.post(pygame.QUIT)
+            super().quit()
         
 
     

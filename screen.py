@@ -26,6 +26,9 @@ class Screen:
         # MUST BE OVERWRITTEN
         return
 
+    def quit(self):
+        pygame.event.post(pygame.event.Event(pygame.QUIT))
+
     #TEST METHOD, NOT TO BE CALLED
     def test_draw(self):
         # Run until the user asks to quit
