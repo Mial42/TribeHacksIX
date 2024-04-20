@@ -12,6 +12,11 @@ class Screen:
         self.__bg_path = bg_path
         self.__screen = screen
 
+    def draw(self):
+        # SIMPLE FUNCTION, CALL WITH super()
+        # ADD MORE TO IT
+        self.draw_bg()
+
     def draw_bg(self):
         scaled = pygame.transform.scale(pygame.image.load(self.__bg_path).convert_alpha(), pygame.display.get_window_size())
         self.__screen.blit(scaled, (0,0))
