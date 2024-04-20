@@ -15,18 +15,19 @@ class GameOverScreen(Screen):
 
     def draw_text(self, text, position, color=(255, 255, 255)):
         text_surface = self.font.render(text, True, color)
-        self.screen.blit(text_surface, position)
+        super().get_screen().blit(text_surface, position)
 
     def draw_button(self, text):
-        pygame.draw.rect(self.screen, self.button_color, self.button_rect)  # Draw the button
+        pygame.draw.rect(super().__screen, self.button_color, self.button_rect)  # Draw the button
         text_surface = self.font.render(text, True, (255, 255, 255))
         text_rect = text_surface.get_rect(center=self.button_rect.center)
-        self.screen.blit(text_surface, text_rect)
+        super().get_screen().blit(text_surface, text_rect)
 
     def display(self):
-        self.screen.fill((0, 0, 0))  # Clear the screen with black
+        screen_hold = super().get_screen()
+        screen_hold.fill((0, 0, 0))  # Clear the screen with black
         if self.bg:
-            self.screen.blit(self.bg, (0, 0))  # Draw the background if it exists
+            screen_hold.blit(self.bg, (0, 0))  # Draw the background if it exists
 
         self.draw_text(f'Final Score: {self.final_score}', (300, 200))
         self.draw_button('Back to Start')

@@ -1,5 +1,4 @@
 import pygame
-import os
 
 class Screen:
     # screen - pygame canvas object
@@ -33,6 +32,12 @@ class Screen:
 
     def quit(self):
         pygame.event.post(pygame.event.Event(pygame.QUIT))
+
+    def get_bg_path(self):
+        return self.__bg_path
+    
+    def get_screen(self):
+        return self.__screen
 
     #TEST METHOD, NOT TO BE CALLED
     def test_draw(self):
