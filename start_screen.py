@@ -6,6 +6,7 @@ class StartScreen(Screen):
         super().__init__(screen, bg_path, screen_switch_event_val)
     
     def start_button(self):
+        
         return
     
     def quit_button(self):
