@@ -6,10 +6,17 @@ class Mecha():
         self.chest = chest
         self.arms = arms
         self.legs = legs
-        self.can_move = True
         self.x = x
         self.y = y
+
+        self.can_move = True
         self.is_stunned = False
+        self.jump = False
+        self.attacking = False
+        self.hit = False
+        self.health = head.health + chest.health + arms.health + legs.health
+
+
     
     def move(self, dy, dx):
         if self.can_move:
@@ -19,7 +26,6 @@ class Mecha():
             return
         
     def draw(self, surface):
-        # Assuming each part's sprite is centered on the same coordinates
         surface.blit(self.legs.sprite, (self.x, self.y))
         surface.blit(self.chest.sprite, (self.x, self.y+self.legs.height))
         surface.blit(self.arms.sprite, (self.x+self.chest.width, self.y+self.legs.height))
@@ -33,13 +39,22 @@ class Mecha():
         if self.health <= 0:
             self.health = 0
             self.alive = False
-            self.update_action()#6:death
+            self.update_action(6)
+        elif self.jump:
+            self.update_action(2)
+        elif self.attacking:
+            self.update_action(3)
+        elif self.hit:
+            self.update_action(5)
+
+
 
     def attack(self, target):
         # Simple attack reducing target health by a fixed amount
         damage = self.arms.damage  
         target.health -= damage  
 
+    
 
 
 
