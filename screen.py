@@ -19,7 +19,7 @@ class Screen:
         return
 
     def switch_screen(self, forward:bool):
-        pygame.event.Event(self.__SCREEN_SWITCH_EVENT, value=forward)
+        pygame.event.post(pygame.event.Event(self.__SCREEN_SWITCH_EVENT, value=forward))
 
     def test_draw(self):
         # Run until the user asks to quit
