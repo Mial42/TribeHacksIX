@@ -2,7 +2,6 @@ import pygame
 import os
 
 class Screen:
-
     def __init__(self, screen, bg_path:str) -> None:
         #setup event to switch screens
         self.__SCREEN_SWITCH_EVENT = pygame.event.custom_type()
