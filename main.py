@@ -37,6 +37,10 @@ def run(screen:pygame.display):
                 break
             if event.type == pygame.event.custom_type():
                 cur_scr += 1
+
+        if not running:
+            break
+        
         screens[cur_scr % 4].draw_bg()
 
         pygame.display.flip()
