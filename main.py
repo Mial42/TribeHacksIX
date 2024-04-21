@@ -33,6 +33,7 @@ def run(screen:pygame.display):
     running = True
     cur_scr = 0
     cur_scr_obj = screens[0]
+    machine = 111 #default mech
 
     while running:
         for event in pygame.event.get():
@@ -41,6 +42,7 @@ def run(screen:pygame.display):
                 break
             elif event.type == switch_event and cur_scr % 4 == 1:
                 cur_scr += (lambda s: 1 if s > 0 else -1)(event.value)
+                machine = event.value
             elif event.type == switch_event:
                 cur_scr += event.value
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -51,7 +53,7 @@ def run(screen:pygame.display):
         
         #generate FightingScreen, GameOverScreen so we don't run them in background
         if(cur_scr % 4 == 2):
-            cur_scr_obj = fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, score_event=score_event)
+            cur_scr_obj = fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, score_event=score_event, design=machine)
         elif(cur_scr % 4 == 3):
             cur_scr_obj = gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, final_score=score_val)
         else:

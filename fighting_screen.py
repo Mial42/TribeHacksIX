@@ -85,6 +85,7 @@ class Enemy:
 
     def spawn(self):
         img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.__imgpath).replace(path_separator[system()][0], path_separator[system()][1]).convert_alpha(), self.__sizeX, self.__sizeY))
+        img_scaled.set_colorkey((255,255,255)) #force white to be transparent
         super().get_screen().blit(img_scaled, (self.__sizeX, self.__sizeY))
         self.spawned = True
 
