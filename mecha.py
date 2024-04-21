@@ -1,4 +1,7 @@
 import pygame
+
+# DEPRECATED CLASS
+
 class Mecha():
     
     def __init__(self, head, chest, arms, legs, x, y):
@@ -9,12 +12,13 @@ class Mecha():
         self.x = x
         self.y = y
 
-        self.can_move = True
-        self.is_stunned = False
+        #depricated
+        # self.can_move = True
+        # self.is_stunned = False
         self.jump = False
         self.attacking = False
         self.hit = False
-        self.health = head.health + chest.health + arms.health + legs.health
+        # self.health = head.health + chest.health + arms.health + legs.health
 
 
     

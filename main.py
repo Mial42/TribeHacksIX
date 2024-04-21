@@ -39,6 +39,8 @@ def run(screen:pygame.display):
             if event.type == pygame.QUIT:
                 running = False
                 break
+            elif event.type == switch_event and cur_scr % 4 == 1:
+                cur_scr += (lambda s: 1 if s > 0 else -1)(event.value)
             elif event.type == switch_event:
                 cur_scr += event.value
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -53,8 +55,9 @@ def run(screen:pygame.display):
         elif(cur_scr % 4 == 3):
             cur_scr_obj = gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, final_score=score_val)
         else:
-            screens[cur_scr % 4].draw()
             cur_scr_obj = screens[cur_scr % 4]
+        
+        cur_scr_obj.draw()
 
         pygame.display.flip()
 
