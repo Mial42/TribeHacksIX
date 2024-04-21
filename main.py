@@ -28,9 +28,9 @@ def run(screen:pygame.display):
     #TODO add background paths to folder and plug those in here
     #TODO replace testbg.png with a real background
     screens = [
-        ss.StartScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event),
-        cs.CreationScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event),
-        fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, score_event=score_event),
+        ss.StartScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/title.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event),
+        cs.CreationScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/constructionBackground.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event),
+        fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/constructionBackground.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, score_event=score_event),
         gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event)
       ]
     
