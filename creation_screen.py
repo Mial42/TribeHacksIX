@@ -14,10 +14,15 @@ class CreationScreen(Screen):
         self.currentlegs = self.legslist[0]
     def setup_mech_button(self):
         self.button_color = (0, 0, 128)  # Blue button
-        self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+        self.button_mech = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
     def handle_mech_button_event(self, event):
         if self.button_rect.collidepoint(event.pos):
-            
+
     def setup_start_button(self):
         self.button_color = (0, 128, 0)  # Green button
-        self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+        self.button_start = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+    def draw_button(self, text):
+        pygame.draw.rect(super().__screen, self.button_color, self.button_rect)  # Draw the button
+        text_surface = self.font.render(text, True, (255, 255, 255))
+        text_rect = text_surface.get_rect(center=self.button_rect.center)
+        super().get_screen().blit(text_surface, text_rect)
