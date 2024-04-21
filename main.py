@@ -16,6 +16,10 @@ path_separator = {"Windows":["/",r"\\","\\"], "Darwin":[r"\\", "/", "/"], "Linux
 #run the game
 # screen - pygame.display var that was set in main()
 def run(screen:pygame.display):
+    #framerate set
+    Clock = pygame.time.Clock()
+    FPS = 60
+
     opsys = platform.system()
     switch_event = pygame.event.custom_type()
     score_event = pygame.event.custom_type()
@@ -25,14 +29,14 @@ def run(screen:pygame.display):
     #TODO replace testbg.png with a real background
     screens = [
         ss.StartScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event),
-        cs.CreationScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event)
-        #fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event),
-        #gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event),
+        cs.CreationScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event),
+        fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, score_event=score_event),
+        gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event)
       ]
     
     running = True
-    cur_scr = 3
-    cur_scr_obj = screens[0]
+    cur_scr = 0
+    cur_scr_obj = screens[cur_scr]
     machine = 111 #default mech
 
     while running:
@@ -53,13 +57,18 @@ def run(screen:pygame.display):
         if not running:
             break
         
+        
+
         #generate FightingScreen, GameOverScreen so we don't run them in background
+        if screens[cur_scr] != cur_scr_obj:
+            cur_scr_obj = screens[cur_scr]
+
         if(cur_scr % 4 == 2):
-            cur_scr_obj = fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, score_event=score_event, design=machine)
+            cur_scr_obj.set_design(machine)
+            # cur_scr_obj = fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, score_event=score_event, design=machine)
         elif(cur_scr % 4 == 3):
-            cur_scr_obj = gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, final_score=score_val)
-        else:
-            cur_scr_obj = screens[cur_scr % 4]
+            cur_scr_obj.set_final_score(score_val)
+            # cur_scr_obj = gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, final_score=score_val)
         
         cur_scr_obj.draw()
 

@@ -2,11 +2,14 @@ from screen import Screen
 import pygame
 
 class GameOverScreen(Screen):
-    def __init__(self, screen: pygame.display, bg_path: str, screen_switch_event_val:int, final_score: int):
+    def __init__(self, screen: pygame.display, bg_path: str, screen_switch_event_val:int):#, final_score: int):
         super().__init__(screen, bg_path, screen_switch_event_val)
-        self.final_score = final_score
+        self.final_score = 0
         self.font = pygame.font.Font(None, 36)  # Use Pygame's default font
         self.setup_button()
+
+    def set_final_score(self, score):
+        self.final_score = score
 
     def setup_button(self):
         self.button_color = (0, 128, 0)  # Green button
