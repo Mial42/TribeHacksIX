@@ -18,11 +18,19 @@ class FightingScreen(Screen):
     
     def spawn_enemies(self):
         num_enemies = [Enemy(random.randint(1, 30), random.randint(1, 30), random.randint(1, 30), random.randint(1, 30), random.randint(1, 30), os.path.join("./assets/imgs/enemy/hammer.png").replace(path_separator[system()][0], path_separator[system()][1]))] * random.randint(0,11)
+        return num_enemies
+    
+    def update_enemies(self, enemies):
+        rmv = []
+        for i in range(len(enemies)):
+            check = enemies[i].update_pos()
+            if check:
+                rmv.append(i)
         
-        return
+        for i in range(len(rmv) - 1, -1, -1):
+            self.__final_score += enemies[rmv[i]].get_spd()
+            enemies.remove(rmv[i])
 
-    def update_score(self):
-        self.__final_score += 1
     
     def draw(self):
         super().draw_bg()
@@ -55,4 +63,13 @@ class Enemy:
         img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.__imgpath).replace(path_separator[system()][0], path_separator[system()][1]).convert_alpha(), self.__sizeX, self.__sizeY))
         super().get_screen.blit(img_scaled, (self.__posX, self.__posY))
 
-        if 
+        if self.__posX + self.__sizeX <= 0:
+            return 1
+        
+        return 0
+    
+    def get_pos(self):
+        return (self.__posX, self.__posY, self.__sizeX, self.__sizeY)
+    
+    def get_spd(self):
+        return self.__speed

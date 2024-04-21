@@ -52,12 +52,12 @@ def run(screen:pygame.display):
         #generate FightingScreen, GameOverScreen so we don't run them in background
         if(cur_scr % 4 == 2):
             cur_scr_obj = fs.FightingScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, score_event=score_event)
-            cur_scr_obj.draw()
         elif(cur_scr % 4 == 3):
             cur_scr_obj = gos.GameOverScreen(screen=screen, bg_path=os.path.join(r"./assets/imgs/bgs/testbg.png").replace(path_separator[opsys][0], path_separator[opsys][1]), screen_switch_event_val=switch_event, final_score=score_val)
         else:
-            screens[cur_scr % 4].draw()
             cur_scr_obj = screens[cur_scr % 4]
+        
+        cur_scr_obj.draw()
 
         pygame.display.flip()
 
