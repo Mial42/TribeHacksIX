@@ -24,7 +24,19 @@ class CreationScreen(Screen):
 
         #text setup
         start_text = self.font.render("Start", True, (255, 255, 255))  # White text
-        self.screen_hold.blit(start_text, (self.start_rct.x + 20, self.start_rct.y + 10))
+        self.screen_hold.blit(start_text, (self.start_button.x + 20, self.start_button.y + 10))
+        start_text = self.font.render("<---", True, (255, 255, 255))  # White text
+        self.screen_hold.blit(start_text, (self.head_prev_button.x + 20, self.head_prev_button.y + 10))
+        start_text = self.font.render("--->", True, (255, 255, 255))  # White text
+        self.screen_hold.blit(start_text, (self.head_next_button.x + 20, self.head_next_button.y + 10))
+        start_text = self.font.render("<---", True, (255, 255, 255))  # White text
+        self.screen_hold.blit(start_text, (self.body_prev_button.x + 20, self.body_prev_button.y + 10))
+        start_text = self.font.render("--->", True, (255, 255, 255))  # White text
+        self.screen_hold.blit(start_text, (self.body_next_button.x + 20, self.body_next_button.y + 10))
+        start_text = self.font.render("<---", True, (255, 255, 255))  # White text
+        self.screen_hold.blit(start_text, (self.legs_prev_button.x + 20, self.legs_prev_button.y + 10))
+        start_text = self.font.render("--->", True, (255, 255, 255))  # White text
+        self.screen_hold.blit(start_text, (self.legs_next_button.x + 20, self.legs_next_button.y + 10))
 
         self.headlist = ["assets/imgs/head1.png", "assets/imgs/head2.png","assets/imgs/clawdius.png"]
         self.bodylist = ["assets/imgs/body1.png", "assets/imgs/body2.png"]
