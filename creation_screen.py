@@ -14,24 +14,31 @@ class CreationScreen(Screen):
         self.currenthead = self.headlist[0]
         self.currentbody = self.bodylist[0]
         self.currentlegs = self.legslist[0]
+
     def setup_head_next_button(self):
         self.button_color = (0, 128, 0)  # Green button
         self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+
     def setup_head_prev_button(self):
         self.button_color = (0, 128, 0)  # Green button
         self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+
     def setup_body_next_button(self):
         self.button_color = (0, 128, 0)  # Green button
         self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+
     def setup_body_prev_button(self):
         self.button_color = (0, 128, 0)  # Green button
         self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+
     def setup_legs_next_button(self):
         self.button_color = (0, 128, 0)  # Green button
         self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+
     def setup_legs_prev_button(self):
         self.button_color = (0, 128, 0)  # Green button
         self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
+
     def setup_start_button(self):
         self.button_color = (0, 128, 0)  # Green button
         self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
