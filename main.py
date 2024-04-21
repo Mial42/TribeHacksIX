@@ -60,8 +60,8 @@ def run(screen:pygame.display):
         
 
         #generate FightingScreen, GameOverScreen so we don't run them in background
-        if screens[cur_scr] != cur_scr_obj:
-            cur_scr_obj = screens[cur_scr]
+        if screens[cur_scr % 4] != cur_scr_obj:
+            cur_scr_obj = screens[cur_scr % 4]
 
         if(cur_scr % 4 == 2):
             cur_scr_obj.set_design(machine)

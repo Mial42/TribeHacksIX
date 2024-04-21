@@ -83,9 +83,9 @@ class Player:
         self.legslist = ["./assets/imgs/parts/legs1.png", "./assets/imgs/parts/legs2.png"]
 
         #head, body, legs from 3 digit int obtained from event
-        self.__head = self.headlist[head]
-        self.__body = self.bodylist[core]
-        self.__legs = self.legslist[legs]
+        self.__head = self.headlist[head - 1]
+        self.__body = self.bodylist[core - 1]
+        self.__legs = self.legslist[legs - 1]
         
         #store current positions as tuples
         self.positions = [(200, 350), (300, 300), (300, 250)]
