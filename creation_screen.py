@@ -26,3 +26,4 @@ class CreationScreen(Screen):
         text_surface = self.font.render(text, True, (255, 255, 255))
         text_rect = text_surface.get_rect(center=self.button_rect.center)
         super().get_screen().blit(text_surface, text_rect)
+        
