@@ -13,7 +13,7 @@ class StartScreen(Screen):
         window_width, window_height = pygame.display.get_window_size()
         button_width = 100
         button_height = 50
-        button_spacing = 100
+        button_spacing = 75
         button_x = (window_width - button_width) // 2
         start_button_y = (window_height - (2 * button_height + button_spacing)) // 2
         quit_button_y = start_button_y + button_height + button_spacing
