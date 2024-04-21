@@ -36,7 +36,7 @@ class CreationScreen(Screen):
                 self.currentbody -= 1
                 self.draw_image(2)
         elif self.body_next_button.collidepoint(event.pos):
-            if(self.currentbody != 3):
+            if(self.currentbody != 2):
                 self.currentbody += 1
                 self.draw_image(2)
         elif self.legs_prev_button.collidepoint(event.pos):
@@ -44,21 +44,21 @@ class CreationScreen(Screen):
                 self.currentlegs -= 1
                 self.draw_image(3)
         elif self.legs_next_button.collidepoint(event.pos):
-            if(self.currentlegs != 3):
+            if(self.currentlegs != 2):
                 self.currentlegs += 1
                 self.draw_image(3)
 
     def draw_image(self, part):
         if(part == 1):
-            img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.legslist[int(((self.currentlegs-1)**2)**(1/2)) % 2]).replace(path_separator[system()][0], path_separator[system()][1])).convert_alpha(), (100, 200))
+            img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.legslist[self.currentlegs-1]).replace(path_separator[system()][0], path_separator[system()][1])).convert_alpha(), (100, 200))
             img_scaled.set_colorkey((255,255,255)) #force white to be transparent
             super().get_screen().blit(img_scaled, (150, 450))
         elif(part ==2):
-            img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.bodylist[int(((self.currentbody-1)**2)**(1/2)) % 2]).replace(path_separator[system()][0], path_separator[system()][1])).convert_alpha(), (100, 200))
+            img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.bodylist[self.currentbody-1]).replace(path_separator[system()][0], path_separator[system()][1])).convert_alpha(), (100, 200))
             img_scaled.set_colorkey((255,255,255)) #force white to be transparent
             super().get_screen().blit(img_scaled, (150, 250))
         else:
-            img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.headlist[int(((self.currenthead-1)**2)**(1/2)) % 2]).replace(path_separator[system()][0], path_separator[system()][1])).convert_alpha(), (100, 200))
+            img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.headlist[self.currenthead-1]).replace(path_separator[system()][0], path_separator[system()][1])).convert_alpha(), (100, 200))
             img_scaled.set_colorkey((255,255,255)) #force white to be transparent
             super().get_screen().blit(img_scaled, (150, 50))
 

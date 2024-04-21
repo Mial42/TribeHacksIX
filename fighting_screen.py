@@ -21,44 +21,50 @@ class FightingScreen(Screen):
         self.__last_spawn = 0
         self.__curtime = time.time()
         self.__spawning = False
-        self.__spawnlist = None
+        self.__spawnlist = []
     
     def make_enemy_list(self):
         #TODO make sure spawns are staggered
-        num_enemies = [Enemy(random.randint(1, 30), random.randint(1, 30), random.randint(1, 30), random.randint(1, 30), random.randint(1, 30), os.path.join("./assets/imgs/enemy/hammer.png").replace(path_separator[system()][0], path_separator[system()][1]))] * random.randint(0,11)
-        return num_enemies
+        self.__spawnlist = [Enemy(pygame.display.get_window_size()[0], random.randint(0,pygame.display.get_window_size()[1]), random.randint(1, 30), random.randint(1, 30), random.randint(1, 30), os.path.join("./assets/imgs/enemy/hammer.png").replace(path_separator[system()][0], path_separator[system()][1]))] * random.randint(1,11)
+        #return num_enemies
     
-    def update_enemies(self, enemies):
+    def update_enemies(self):
         rmv = []
-        for i in range(len(enemies)):
-            if enemies[i].spawned == True:
-                check = enemies[i].update_pos()
+        for i in range(len(self.__spawnlist)):
+            if self.__spawnlist[i].img_scaled is not None:
+                check = self.__spawnlist[i].update_pos()
                 if check:
                     rmv.append(i)
         
         for i in range(len(rmv) - 1, -1, -1):
-            self.__final_score += enemies[rmv[i]].get_spd()
-            enemies.remove(rmv[i])
+            self.__final_score += self.__spawnlist[rmv[i]].get_spd()
+            self.__spawnlist.remove(rmv[i])
+        
+        print(len(self.__spawnlist))
 
     
     def draw(self):
         super().draw_bg()
-        
+
         #timer so that player isn't overwhelmed by enemies
-        if self.__curtime - self.__last_spawn > self.__spawn_rate and not self.__spawning and not self.__spawnlist:
-            l = self.make_enemy_list()
+        if (self.__curtime - self.__last_spawn) > self.__spawn_rate and not self.__spawning and not self.__spawnlist:
+            print(f"Setting up spawn list {self.__spawning} {self.__spawnlist}")
+            self.make_enemy_list()
             self.__spawning = True
         elif self.__spawnlist and not self.__spawning:
+            print(f"stopping spawn {self.__spawning} {self.__spawnlist}")
             self.__last_spawn = time.time()
-            del(self.__spawnlist[:])
-            self.__spawnlist = None
-        elif self.__spawning and self.__curtime - self.__last_spawn > self.__spawn_rate // len(self.__spawnlist) + 1:
+        elif self.__spawning and (self.__curtime - self.__last_spawn) > (self.__spawn_rate // len(self.__spawnlist) + .5):
+            print(f"looking for next spawnable enemy {self.__spawning} {self.__spawnlist}")
             for ele in self.__spawnlist:
-                if ele.spawned == False:
+                if ele.img_scaled is None:
                     ele.spawn()
+                    super().get_screen().blit(ele.img_scaled, (self.__posX, self.__posY))
+                    self.__last_spawn = time.time()
                     break
-
-        self.update_enemies(self.__spawnlist)
+            self.__spawning = False
+        print(f"{self.__spawning} {self.__spawnlist}")
+        self.update_enemies()
         self.__curtime = time.time()
             
 
@@ -80,21 +86,19 @@ class Enemy:
         self.__imgpath = imgpath
         #limit speed by however large the enemy is
         self.__speed = (lambda s: s if s < self.__sizeX else self.__sizeX - 10)(speed)
-        self.spawned = False
+        self.img_scaled = None
 
 
     def spawn(self):
-        img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.__imgpath).replace(path_separator[system()][0], path_separator[system()][1]).convert_alpha(), self.__sizeX, self.__sizeY))
-        img_scaled.set_colorkey((255,255,255)) #force white to be transparent
-        super().get_screen().blit(img_scaled, (self.__sizeX, self.__sizeY))
-        self.spawned = True
+        self.img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.__imgpath).replace(path_separator[system()][0], path_separator[system()][1]).convert_alpha(), self.__sizeX, self.__sizeY))
+        self.img_scaled.set_colorkey((255,255,255)) #force white to be transparent
 
     def update_pos(self):
         self.__posX -= self.__speed
-        img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.__imgpath).replace(path_separator[system()][0], path_separator[system()][1]).convert_alpha(), self.__sizeX, self.__sizeY))
-        super().get_screen().blit(img_scaled, (self.__posX, self.__posY))
+        self.img_scaled = pygame.transform.scale(pygame.image.load(os.path.join(self.__imgpath).replace(path_separator[system()][0], path_separator[system()][1]).convert_alpha(), self.__sizeX, self.__sizeY))
 
         if self.__posX + self.__sizeX <= 0:
+            self.img_scaled = None
             return 1
         
         return 0

@@ -1,6 +1,5 @@
 from screen import Screen
 import pygame
-from screen import Screen
 
 class GameOverScreen(Screen):
     def __init__(self, screen: pygame.display, bg_path: str, screen_switch_event_val:int, final_score: int):
@@ -13,25 +12,22 @@ class GameOverScreen(Screen):
         self.button_color = (0, 128, 0)  # Green button
         self.button_rect = pygame.Rect(300, 300, 200, 50)  # Button dimensions and position
 
-    def draw_text(self, text, position, color=(255, 255, 255)):
+    def draw_text(self, text, position, color=(255, 255, 200)):
         text_surface = self.font.render(text, True, color)
         super().get_screen().blit(text_surface, position)
 
     def draw_button(self, text):
-        pygame.draw.rect(super().__screen, self.button_color, self.button_rect)  # Draw the button
-        text_surface = self.font.render(text, True, (255, 255, 255))
+        pygame.draw.rect(super().get_screen(), self.button_color, self.button_rect)  # Draw the button
+        text_surface = self.font.render(text, True, (255, 255, 200))
         text_rect = text_surface.get_rect(center=self.button_rect.center)
         super().get_screen().blit(text_surface, text_rect)
 
-    def display(self):
+    def draw(self):
         screen_hold = super().get_screen()
         screen_hold.fill((0, 0, 0))  # Clear the screen with black
-        if self.bg:
-            screen_hold.blit(self.bg, (0, 0))  # Draw the background if it exists
 
         self.draw_text(f'Final Score: {self.final_score}', (300, 200))
         self.draw_button('Back to Start')
-        pygame.display.flip()  # Update the display
 
     def handle_event(self, event):
         #if event.type == pygame.MOUSEBUTTONDOWN:

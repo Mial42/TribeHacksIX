@@ -31,7 +31,7 @@ def run(screen:pygame.display):
       ]
     
     running = True
-    cur_scr = 0
+    cur_scr = 3
     cur_scr_obj = screens[0]
     machine = 111 #default mech
 
@@ -43,6 +43,8 @@ def run(screen:pygame.display):
             elif event.type == switch_event and cur_scr % 4 == 1:
                 cur_scr += (lambda s: 1 if s > 0 else -1)(event.value)
                 machine = event.value
+            elif event.type == score_event:
+                score_val = event.value
             elif event.type == switch_event:
                 cur_scr += event.value
             elif event.type == pygame.MOUSEBUTTONDOWN:
