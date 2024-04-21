@@ -12,9 +12,9 @@ class CreationScreen(Screen):
         self.font = pygame.font.Font(None, 36)  # Use Pygame's default font
         
 
-        self.headlist = ["./assets/imgs/head1.png", "./assets/imgs/head2.png","assets/imgs/clawdius.png"]
-        self.bodylist = ["./assets/imgs/body1.png", "./assets/imgs/body2.png"]
-        self.legslist = ["./assets/imgs/legs1.png", "./assets/imgs/legs2.png"]
+        self.headlist = ["./assets/imgs/parts/head1.png", "./assets/imgs/parts/head2.png","assets/imgs/parts/clawdius.png"]
+        self.bodylist = ["./assets/imgs/parts/body1.png", "./assets/imgs/parts/body2.png"]
+        self.legslist = ["./assets/imgs/parts/legs1.png", "./assets/imgs/parts/legs2.png"]
         self.currenthead = 1
         self.currentbody = 1
         self.currentlegs = 1

@@ -78,14 +78,27 @@ class FightingScreen(Screen):
 
 class Player:
     def __init__(self, head:int, core:int, legs:int) -> None:
-        self.headlist = ["./assets/imgs/head1.png", "./assets/imgs/head2.png","assets/imgs/clawdius.png"]
-        self.bodylist = ["./assets/imgs/body1.png", "./assets/imgs/body2.png"]
-        self.legslist = ["./assets/imgs/legs1.png", "./assets/imgs/legs2.png"]
+        self.headlist = ["./assets/imgs/parts/head1.png", "./assets/imgs/parts/head2.png","assets/imgs/parts/clawdius.png"]
+        self.bodylist = ["./assets/imgs/parts/body1.png", "./assets/imgs/parts/body2.png"]
+        self.legslist = ["./assets/imgs/parts/legs1.png", "./assets/imgs/parts/legs2.png"]
 
+        #head, body, legs from 3 digit int obtained from event
         self.__head = self.headlist[head]
         self.__body = self.bodylist[core]
         self.__legs = self.legslist[legs]
-
+        
+        #store current positions as tuples
+        self.positions = [(200, 350), (300, 300), (300, 250)]
+        #setup a basic hitbox using a rect, do not draw
+        self.__rect_hitbox = pygame.Rect(self.positions[0][0],self.positions[0][1], 200, self.positions[0][1] - self.positions[2][1])
+    
+    # def move_direction(self, updown:int):
+    #     return
+    
+    # def check_collision(self,enemy):
+    #     for position in self.positions:
+    #         if 
+    
 class Enemy:
     def __init__(self, posX:int, posY:int, sizeX:int, sizeY:int, speed:int, imgpath:str) -> None:
         self.__posX = posX
