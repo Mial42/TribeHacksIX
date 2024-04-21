@@ -82,9 +82,9 @@ class Player:
         self.bodylist = ["./assets/imgs/body1.png", "./assets/imgs/body2.png"]
         self.legslist = ["./assets/imgs/legs1.png", "./assets/imgs/legs2.png"]
 
-        self.__head = self.headlist[head]
-        self.__body = self.bodylist[core]
-        self.__legs = self.legslist[legs]
+        self.__head = self.headlist[head-1]
+        self.__body = self.bodylist[core-1]
+        self.__legs = self.legslist[legs-1]
 
 class Enemy:
     def __init__(self, posX:int, posY:int, sizeX:int, sizeY:int, speed:int, imgpath:str) -> None:
